@@ -4,15 +4,15 @@
   "description": "A utility package for generating random values including numbers, strings, and objects, with support for custom probabilities and weighted distributions.",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/author/library#readme",
+  "homepage": "https://github.com/moebhius/random-values#readme",
   "bugs": {
-    "url": "https://github.com/author/library/issues"
+    "url": "https://github.com/moebhius/random-values/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/moebhius/random-values.git"
   },
-  "author": "Author Name <author.name@mail.com>",
+  "author": "Jorge Muñoz",
   "files": [
     "dist"
   ],
