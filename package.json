@@ -1,7 +1,7 @@
 {
-  "name": "tsdown-starter",
-  "version": "0.0.0",
-  "description": "A starter for creating a TypeScript package.",
+  "name": "@moebhius/random-values",
+  "version": "0.0.1",
+  "description": "A utility package for generating random values including numbers, strings, and objects, with support for custom probabilities and weighted distributions.",
   "type": "module",
   "license": "MIT",
   "homepage": "https://github.com/author/library#readme",
@@ -16,7 +16,7 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
