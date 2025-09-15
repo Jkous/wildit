@@ -1,6 +1,6 @@
 {
   "name": "@moebhius/random-values",
-  "version": "0.0.2-beta.1",
+  "version": "0.0.2-beta.2",
   "description": "A utility package for generating random values including numbers, strings, and objects, with support for custom probabilities and weighted distributions.",
   "type": "module",
   "license": "MIT",
