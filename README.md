@@ -43,7 +43,7 @@ This project is licensed under the MIT License. See the `LICENCE` file for detai
 
 ## Issues
 
-Found a bug or have a suggestion? Please open an [issue](https://github.com/moebhius/random-values/issues) describing the problem or improvement.
+Found a bug or have a suggestion? Please open an [issue](https://github.com/Jkous/random-values/issues) describing the problem or improvement.
 
 
 ## Contributing
