@@ -1,7 +1,7 @@
 {
   "packageManager": "pnpm@10.16.1",
-  "name": "@moebhius/random-values",
-  "version": "0.0.2-beta.6",
+  "name": "random-values",
+  "version": "0.0.2-beta.7",
   "description": "A utility package for generating random values including numbers, strings, and objects, with support for custom probabilities and weighted distributions.",
   "type": "module",
   "license": "MIT",
@@ -42,5 +42,17 @@
     "tsdown": "0.15.1",
     "typescript": "5.9.2",
     "vitest": "3.2.4"
-  }
+  },
+  "keywords": [
+    "random",
+    "random-values",
+    "chance",
+    "faker",
+    "simulation",
+    "utilities",
+    "data generation",
+    "seeded",
+    "pseudo",
+    "value generator"
+  ]
 }
