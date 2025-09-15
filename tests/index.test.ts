@@ -1,6 +1,12 @@
 import { expect, test } from 'vitest'
-import { myFunction } from '../src'
+import { RandomValues } from '../src'
 
 test('myFunction', () => {
-  expect(myFunction()).toBe('Hello, world!')
+  const random = new RandomValues(12345)
+
+  const value = random.random()
+  
+  expect(value).toBeGreaterThanOrEqual(0)
+  expect(value).toBeLessThan(1)
 })
+

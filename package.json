@@ -34,6 +34,7 @@
     "release": "bumpp && npm publish"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.4",
     "@types/node": "24.4.0",
     "bumpp": "10.2.3",
     "tsdown": "0.15.1",
