@@ -1,7 +1,7 @@
 {
   "packageManager": "pnpm@10.16.1",
   "name": "wildit",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.5",
   "description": "A utility package for generating random values including numbers, strings, and objects, with support for custom probabilities and weighted distributions.",
   "type": "module",
   "license": "MIT",
