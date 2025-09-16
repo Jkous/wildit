@@ -1,8 +1,8 @@
-import { expect, test, describe } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import wildit from '../src'
 
 describe('random core', () => {
-  test('basic random', () => {
+  it('basic random', () => {
     const random = wildit(12345)
 
     const value = random.random()
@@ -11,8 +11,8 @@ describe('random core', () => {
     expect(value).toBeLessThan(1)
   })
 
-  // Agregar un nuevo test para verificar la consistencia con la misma semilla
-  test('consistent random with same seed', () => {
+  // Add a test to verify consistency with the same seed
+  it('consistent random with same seed', () => {
     const seed = 67890
     const random1 = wildit(seed)
     const random2 = wildit(seed)
@@ -23,8 +23,8 @@ describe('random core', () => {
     expect(values1).toEqual(values2)
   })
 
-  // Agregar un test para verificar que diferentes semillas producen diferentes secuencias
-  test('different seeds produce different sequences', () => {
+  // Add a test to verify that different seeds produce different sequences
+  it('different seeds produce different sequences', () => {
     const random1 = wildit(11111)
     const random2 = wildit(22222)
 
@@ -34,8 +34,8 @@ describe('random core', () => {
     expect(values1).not.toEqual(values2)
   })
 
-  // Agregar un test para verificar que los valores generados están dentro del rango esperado
-  test('random values are within expected range', () => {
+  // Add a test to verify that generated values are within the expected range
+  it('random values are within expected range', () => {
     const random = wildit(54321)
 
     for (let i = 0; i < 100; i++) {
@@ -45,8 +45,8 @@ describe('random core', () => {
     }
   })
 
-  // Agregar un test para verificar que la función random() es llamada correctamente
-  test('random function is callable', () => {
+  // Add a test to verify that the random() function is callable
+  it('random function is callable', () => {
     const random = wildit(13579)
 
     expect(typeof random.random).toBe('function')
@@ -54,13 +54,13 @@ describe('random core', () => {
     expect(typeof value).toBe('number')
   })
 
-  // Agregar un test para verificar que la clase RandomValues puede ser instanciada sin errores
-  test('RandomValues class instantiation', () => {
+  // Add a test to verify that the RandomValues class can be instantiated without errors
+  it('RandomValues class instantiation', () => {
     expect(() => wildit(24680)).not.toThrow()
   })
 
-  // Agregar un test para verificar que la clase RandomValues maneja correctamente valores de semilla negativos
-  test('RandomValues handles negative seed values', () => {
+  // Add a test to verify that the RandomValues class correctly handles negative seed values
+  it('RandomValues handles negative seed values', () => {
     const random = wildit(-12345)
 
     const value = random.random()
@@ -69,8 +69,8 @@ describe('random core', () => {
     expect(value).toBeLessThan(1)
   })
 
-  // Agregar un test para verificar que la clase RandomValues maneja correctamente valores de semilla cero
-  test('RandomValues handles zero seed value', () => {
+  // Add a test to verify that the RandomValues class correctly handles zero seed value
+  it('RandomValues handles zero seed value', () => {
     const random = wildit(0)
 
     const value = random.random()
@@ -79,8 +79,8 @@ describe('random core', () => {
     expect(value).toBeLessThan(1)
   })
 
-  // Agregar un test para verificar que la clase RandomValues maneja correctamente valores de semilla muy grandes
-  test('RandomValues handles large seed values', () => {
+  // Add a test to verify that the RandomValues class correctly handles very large seed values
+  it('RandomValues handles large seed values', () => {
     const random = wildit(1e12)
 
     const value = random.random()
@@ -88,8 +88,9 @@ describe('random core', () => {
     expect(value).toBeGreaterThanOrEqual(0)
     expect(value).toBeLessThan(1)
   })
-  // Agregar un test para verificar que la clase RandomValues maneja correctamente valores de semilla no enteros
-  test('RandomValues handles non-integer seed values', () => {
+
+  // Add a test to verify that the RandomValues class correctly handles non-integer seed values
+  it('RandomValues handles non-integer seed values', () => {
     const random = wildit(123.456)
 
     const value = random.random()
@@ -97,8 +98,9 @@ describe('random core', () => {
     expect(value).toBeGreaterThanOrEqual(0)
     expect(value).toBeLessThan(1)
   })
-  // Agregar un test para verificar que la clase RandomValues maneja correctamente valores de semilla muy pequeños
-  test('RandomValues handles very small seed values', () => {
+
+  // Add a test to verify that the RandomValues class correctly handles very small seed values
+  it('RandomValues handles very small seed values', () => {
     const random = wildit(1e-10)
 
     const value = random.random()
