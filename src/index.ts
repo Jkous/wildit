@@ -1,7 +1,7 @@
 import RandomCore from './RandomCore'
 
-export class RandomValues extends RandomCore {}
+export class Wildit extends RandomCore {}
 
-export default function createRandomValues(seed: number) {
-  return new RandomValues(seed || Date.now() * Math.random())
+export default function createwildit(seed: number) {
+  return new Wildit(seed || Date.now() * Math.random())
 }

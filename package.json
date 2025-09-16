@@ -1,17 +1,17 @@
 {
   "packageManager": "pnpm@10.16.1",
-  "name": "random-values",
+  "name": "wildit",
   "version": "0.0.1-beta.3",
   "description": "A utility package for generating random values including numbers, strings, and objects, with support for custom probabilities and weighted distributions.",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/Jkous/random-values#readme",
+  "homepage": "https://github.com/Jkous/wildit#readme",
   "bugs": {
-    "url": "https://github.com/Jkous/random-values/issues"
+    "url": "https://github.com/Jkous/wildit/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jkous/random-values.git"
+    "url": "git+https://github.com/Jkous/wildit.git"
   },
   "author": "Jorge Muñoz",
   "files": [
@@ -44,7 +44,7 @@
     "vitest": "3.2.4"
   },
   "keywords": [
-    "random-values",
+    "wildit",
     "random",
     "randomizer",
     "simulation",

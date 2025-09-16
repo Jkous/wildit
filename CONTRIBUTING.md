@@ -1,6 +1,6 @@
-# Contributing to random-values
+# Contributing to wildit
 
-Thank you for your interest in contributing to random-values! We welcome contributions from everyone. Please read the following guidelines to help us maintain a collaborative and respectful environment.
+Thank you for your interest in contributing to wildit! We welcome contributions from everyone. Please read the following guidelines to help us maintain a collaborative and respectful environment.
 
 ## Code of Conduct
 
@@ -39,4 +39,4 @@ If you have questions, open an issue or contact the maintainers.
 
 ---
 
-Thank you for helping make random-values better!
+Thank you for helping make wildit better!

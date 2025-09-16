@@ -1,6 +1,6 @@
 
 
-# random-values
+# wildit
 
 Random value generator for TypeScript. This project provides utilities to generate random numbers, strings, and other data types, useful for testing, simulations, and general development.
 
@@ -29,7 +29,7 @@ pnpm run build
 Import and use in your project:
 
 ```ts
-import RandomValues from 'random-values';
+import RandomValues from 'wildit';
 
 const randomizer = createRandomValues(12345)
 console.log(randomizer.random()) // Random float between 0 and 1
@@ -43,7 +43,7 @@ This project is licensed under the MIT License. See the `LICENCE` file for detai
 
 ## Issues
 
-Found a bug or have a suggestion? Please open an [issue](https://github.com/Jkous/random-values/issues) describing the problem or improvement.
+Found a bug or have a suggestion? Please open an [issue](https://github.com/Jkous/wildit/issues) describing the problem or improvement.
 
 
 ## Contributing
