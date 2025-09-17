@@ -18,10 +18,19 @@ pnpm install wildit
 Import and use in your project:
 
 ```ts
-import RandomValues from 'wildit';
+import wildit, { randomInt } from 'wildit';
 
-const randomizer = createRandomValues(12345)
-console.log(randomizer.random()) // Random float between 0 and 1
+// Create a default randomizer called `wildit` with a random seed
+wildit();
+
+// Create a randomizer with a specific seed
+wildit('my_randomizer_key', 12345);
+
+
+// Get a random integer between 0 and 100
+const randomInt = wildit('my_randomizer_key').randomInt(0, 100); // Random integer between 0 and 100
+
+
 ```
 
 
