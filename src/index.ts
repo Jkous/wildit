@@ -1,24 +1,9 @@
 import { next } from './randomizer'
-
-export type RandomizerFn<K extends string, F> = {
-  readonly key: K
-  readonly build: (rng: () => number) => F
-}
+import type { MakeRandomizerResult, RandomizerFn } from './types'
 
 // Re-export the function creators for better Go to Definition support
 export { createRandomInt } from './fns/randomInt'
 export { createRandomPercent } from './fns/randomPercent'
-
-// Helper type that preserves the original function references
-type ExtractFunctionType<T> = T extends RandomizerFn<string, infer F>
-  ? F
-  : never
-
-// More precise type mapping that helps with Go to Definition
-type MakeRandomizerResult<T extends readonly RandomizerFn<string, unknown>[]> =
-  {
-    readonly [K in T[number] as K['key']]: ExtractFunctionType<K>
-  }
 
 // function getRandomSeed() {
 //   return Date.now() * Math.random()

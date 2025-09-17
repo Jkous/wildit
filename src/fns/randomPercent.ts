@@ -1,4 +1,4 @@
-import type { RandomizerFn } from '../index'
+import type { RandomizerFn } from '../types'
 
 /**
  * Generates a random percentage between 1 and 100 (inclusive)
