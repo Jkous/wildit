@@ -1,9 +1,19 @@
-type RandomizerFn<K extends string, F> = {
-  key: K
-  build: (rng: () => number) => F
+import type { RandomizerFn } from '../index'
+
+/**
+ * Generates a random percentage between 1 and 100 (inclusive)
+ * @returns A random number between 1 and 100
+ */
+export function createRandomPercent(rng: () => number) {
+  return function randomPercent(): number {
+    return Math.floor(rng() * (100 - 1 + 1)) + 1
+  }
 }
 
 export const randomPercent = {
   key: 'randomPercent',
-  build: (rng: () => number) => () => Math.floor(rng() * (100 - 1 + 1)) + 1
-} as RandomizerFn<'randomPercent', () => number>
+  build: createRandomPercent
+} as const satisfies RandomizerFn<
+  'randomPercent',
+  ReturnType<typeof createRandomPercent>
+>

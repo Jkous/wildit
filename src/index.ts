@@ -1,9 +1,24 @@
 import { next } from './randomizer'
 
 export type RandomizerFn<K extends string, F> = {
-  key: K
-  build: (rng: () => number) => F
+  readonly key: K
+  readonly build: (rng: () => number) => F
 }
+
+// Re-export the function creators for better Go to Definition support
+export { createRandomInt } from './fns/randomInt'
+export { createRandomPercent } from './fns/randomPercent'
+
+// Helper type that preserves the original function references
+type ExtractFunctionType<T> = T extends RandomizerFn<string, infer F>
+  ? F
+  : never
+
+// More precise type mapping that helps with Go to Definition
+type MakeRandomizerResult<T extends readonly RandomizerFn<string, unknown>[]> =
+  {
+    readonly [K in T[number] as K['key']]: ExtractFunctionType<K>
+  }
 
 // function getRandomSeed() {
 //   return Date.now() * Math.random()
@@ -11,20 +26,18 @@ export type RandomizerFn<K extends string, F> = {
 
 export default function makeRandomizer<
   T extends readonly RandomizerFn<string, unknown>[]
->(
-  seed: number,
-  fns: T
-): {
-  [K in T[number] as K['key']]: K extends RandomizerFn<string, infer F>
-    ? F
-    : never
-} {
+>(seed: number, fns: T): MakeRandomizerResult<T> {
   const rng = next(seed)
-  return Object.fromEntries(fns.map((fn) => [fn.key, fn.build(rng)])) as {
-    [K in T[number] as K['key']]: K extends RandomizerFn<string, infer F>
-      ? F
-      : never
+  const result = {} as Record<string, unknown>
+
+  // Using a for loop and direct assignment to maintain better source mapping
+  for (const fn of fns) {
+    // Store the built function with its original reference
+    const builtFunction = fn.build(rng)
+    result[fn.key] = builtFunction
   }
+
+  return result as MakeRandomizerResult<T>
 }
 
 // export function createRandomizer(
