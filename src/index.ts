@@ -1,12 +1,30 @@
 import { next } from './randomizer'
 
-function getRandomSeed() {
-  return Date.now() * Math.random()
+export type RandomizerFn<K extends string, F> = {
+  key: K
+  build: (rng: () => number) => F
 }
 
-export default function makeRandomizer(seed: number, fns: Function[]) {
+// function getRandomSeed() {
+//   return Date.now() * Math.random()
+// }
+
+export default function makeRandomizer<
+  T extends readonly RandomizerFn<string, unknown>[]
+>(
+  seed: number,
+  fns: T
+): {
+  [K in T[number] as K['key']]: K extends RandomizerFn<string, infer F>
+    ? F
+    : never
+} {
   const rng = next(seed)
-  return Object.fromEntries(fns.map((fn) => [fn.key, fn.build(rng)]))
+  return Object.fromEntries(fns.map((fn) => [fn.key, fn.build(rng)])) as {
+    [K in T[number] as K['key']]: K extends RandomizerFn<string, infer F>
+      ? F
+      : never
+  }
 }
 
 // export function createRandomizer(
