@@ -1,24 +1,29 @@
-import { describe, it, expect } from 'vitest'
-import { addRandomizer, getRandomizer } from '../src/store'
+import { beforeEach, describe, it, expect } from 'vitest'
+import { clearRandomizers, getRandomizer } from '../src/store'
+import wildit from '../src/index'
 import { SeedError } from '../src/Errors'
 
-describe('seedStore key validation', () => {
-  it('allows adding a valid key', () => {
-    expect(() => addRandomizer('user1', 123)).not.toThrow()
+describe('seedstore', () => {
+  beforeEach(() => {
+    clearRandomizers()
+  })
+
+  it('should allow adding a valid key', () => {
+    expect(() => wildit('user1')).not.toThrow()
     expect(getRandomizer('user1')).toBeDefined()
   })
 
-  it('rejects empty key', () => {
-    expect(() => addRandomizer('', 123)).toThrow(SeedError)
-    expect(() => addRandomizer('   ', 123)).toThrow(SeedError)
+  it('should reject an empty key', () => {
+    expect(() => wildit('')).toThrow(SeedError)
+    expect(() => wildit('   ')).toThrow(SeedError)
   })
 
-  it('rejects reserved key "wildit"', () => {
-    expect(() => addRandomizer('wildit', 123)).toThrow(SeedError)
+  it('should reject the reserved key "wildit"', () => {
+    expect(() => wildit('wildit')).toThrow(SeedError)
   })
 
-  it('rejects duplicate key', () => {
-    addRandomizer('unique', 456)
-    expect(() => addRandomizer('unique', 789)).toThrow(SeedError)
+  it('should reject a duplicate key', () => {
+    wildit('unique')
+    expect(() => wildit('unique')).toThrow(SeedError)
   })
 })

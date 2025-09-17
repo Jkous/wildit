@@ -1,17 +1,21 @@
 export function mulberry32(seed: number) {
   let t = seed >>> 0
-  return () => {
+
+  const next = () => {
     t += 0x6d2b79f5
     let r = Math.imul(t ^ (t >>> 15), t | 1)
     r ^= r + Math.imul(r ^ (r >>> 7), r | 61)
     return ((r ^ (r >>> 14)) >>> 0) / 4294967296
   }
+  next.seed = seed
+
+  return next
 }
 
 function splitmix32(seed: number) {
   let state = seed >>> 0 // force to 32-bit unsigned
 
-  return () => {
+  const next = () => {
     state = (state + 0x9e3779b9) >>> 0 // 32-bit constant
 
     let z = state
@@ -24,8 +28,12 @@ function splitmix32(seed: number) {
     // Normalize to [0,1)
     return (z >>> 0) / 4294967296
   }
+
+  next.seed = seed
+
+  return next
 }
 
-export function getRandomGenerator(seed: number) {
+export function next(seed: number) {
   return splitmix32(seed)
 }

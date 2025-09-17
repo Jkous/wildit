@@ -1,6 +1,7 @@
 import { SeedError } from './Errors'
+import { next } from './randomizer'
 
-export const seedStore = new Map<string, () => number>()
+export const seedStore = new Map<string, ReturnType<typeof next>>()
 
 export function addRandomizer(key: string, seed: number) {
   if (typeof key !== 'string' || !key.trim()) {
@@ -9,26 +10,36 @@ export function addRandomizer(key: string, seed: number) {
 
   const parsedKey = key.trim()
 
-  if (parsedKey === 'wildit') {
-    throw new SeedError(
-      'The key "wildit" is reserved and cannot be used.',
-      parsedKey
-    )
-  }
+  const currentNext = seedStore.get(parsedKey)
 
-  if (seedStore.has(parsedKey) && seedStore.get(parsedKey) !== undefined) {
+  if (currentNext && currentNext.seed !== seed) {
     throw new SeedError(
       `Randomizer with key "${parsedKey}" already exists. Overwriting is not allowed.`,
       parsedKey
     )
   }
 
-  if (!seedStore.has(parsedKey)) {
-    const generator = Math.abs(seed) % 1 === 0 ? seed : Math.floor(seed * 1e9)
-    seedStore.set(parsedKey, () => generator)
+  if (!currentNext) {
+    seedStore.set(parsedKey, next(seed))
   }
+
+  return getRandomizer(parsedKey)
 }
 
 export function getRandomizer(key: string) {
-  return seedStore.get(key)
+  const randomizer = seedStore.get(key)
+  if (!randomizer) {
+    throw new SeedError(`No randomizer found for key "${key}".`, key)
+  }
+
+  return randomizer
+}
+
+export function clearRandomizers() {
+  //const wilditRandomizer = seedStore.get('wildit')
+  seedStore.clear()
+
+  //if (wilditRandomizer) {
+  //  seedStore.set('wildit', wilditRandomizer)
+  //}
 }
