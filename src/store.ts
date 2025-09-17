@@ -10,16 +10,16 @@ export function addRandomizer(key: string, seed: number) {
 
   const parsedKey = key.trim()
 
-  const currentNext = seedStore.get(parsedKey)
+  const currentRandomizer = seedStore.get(parsedKey)
 
-  if (currentNext && currentNext.seed !== seed) {
+  if (currentRandomizer && currentRandomizer.seed() !== seed) {
     throw new SeedError(
       `Randomizer with key "${parsedKey}" already exists. Overwriting is not allowed.`,
       parsedKey
     )
   }
 
-  if (!currentNext) {
+  if (!currentRandomizer) {
     seedStore.set(parsedKey, next(seed))
   }
 
@@ -42,4 +42,12 @@ export function clearRandomizers() {
   //if (wilditRandomizer) {
   //  seedStore.set('wildit', wilditRandomizer)
   //}
+}
+
+export function remove(key: string) {
+  if (key === 'wildit') {
+    throw new SeedError('The default randomizer cannot be removed.', key)
+  }
+
+  seedStore.delete(key)
 }

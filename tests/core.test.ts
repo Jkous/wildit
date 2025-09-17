@@ -18,14 +18,22 @@ describe('core', () => {
     const randomizer1 = wildit('r1', 123456)
     const randomizer2 = wildit('r2', 123456)
 
-    expect(randomizer1.seed).toBeDefined()
-    expect(randomizer2.seed).toBeDefined()
-    expect(randomizer1.seed).toBe(randomizer2.seed)
+    expect(randomizer1.seed()).toBeDefined()
+    expect(randomizer2.seed()).toBeDefined()
+    expect(randomizer1.seed()).toBe(randomizer2.seed())
   })
 
   it('should throw an error when creating two randomizers with the same key but different seeds', () => {
     wildit('duplicateKey', 123456)
     expect(() => wildit('duplicateKey', 654321)).toThrow(SeedError)
+  })
+
+  it('Should return the same randomizer if called with the same key and same seed', () => {
+    const randomizer1 = wildit('r1', 123456)
+    const randomizer2 = wildit('r1', 123456)
+
+    expect(randomizer1).toBe(randomizer2)
+    expect(randomizer1.seed()).toBe(randomizer2.seed())
   })
 
   it('Two randomizers should generate the same sequence with the same seed', () => {
@@ -41,9 +49,9 @@ describe('core', () => {
 
   it('should create a randomizer and generate a seed', () => {
     const randomizer = wildit()
-    expect(typeof randomizer).toBe('function')
+    expect(randomizer).toBeTypeOf('function')
 
-    expect(randomizer.seed).toBeDefined()
-    expect(typeof randomizer.seed).toBe('number')
+    expect(randomizer.seed()).toBeDefined()
+    expect(randomizer.seed()).toBeTypeOf('number')
   })
 })

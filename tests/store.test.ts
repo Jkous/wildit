@@ -3,7 +3,7 @@ import { clearRandomizers, getRandomizer } from '../src/store'
 import wildit from '../src/index'
 import { SeedError } from '../src/Errors'
 
-describe('seedstore', () => {
+describe('seedStore', () => {
   beforeEach(() => {
     clearRandomizers()
   })

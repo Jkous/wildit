@@ -7,7 +7,7 @@ export function mulberry32(seed: number) {
     r ^= r + Math.imul(r ^ (r >>> 7), r | 61)
     return ((r ^ (r >>> 14)) >>> 0) / 4294967296
   }
-  next.seed = seed
+  next.seed = () => seed
 
   return next
 }
@@ -29,7 +29,7 @@ function splitmix32(seed: number) {
     return (z >>> 0) / 4294967296
   }
 
-  next.seed = seed
+  next.seed = () => seed
 
   return next
 }
