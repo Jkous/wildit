@@ -1,15 +1,20 @@
 import { SeedError } from './Errors'
 import { addRandomizer } from './store'
 import { next } from './randomizer'
-import type { RandomizerFunction } from './types'
+import type { RandomizerFn } from './types'
 
 function getRandomSeed() {
   return Date.now() * Math.random()
 }
 
 export default function makeRandomizer<
-  T extends readonly { key: string; build: (rng: () => any) => any }[]
->(seed: number, fns: T) {
+  T extends readonly RandomizerFn<string, any>[]
+>(
+  seed: number,
+  fns: T
+): {
+  [K in T[number] as K['key']]: ReturnType<T[number]['build']>
+} {
   const rng = next(seed)
   return Object.fromEntries(fns.map((fn) => [fn.key, fn.build(rng)])) as {
     [K in T[number] as K['key']]: ReturnType<T[number]['build']>
@@ -45,4 +50,4 @@ export default function makeRandomizer<
 
 // Re-exports of functions
 export { randomInt } from './fns/randomInt'
-export { randomChoice, type implRandomChoice } from './fns/choice'
+export { randomPercent } from './fns/randomPercent'
