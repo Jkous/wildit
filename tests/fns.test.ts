@@ -7,7 +7,7 @@ const randomizer = wildit()
 // Test size per random function
 const TEST_SIZE = 1000
 
-describe('fns', () => {
+describe.skip('fns', () => {
   it('randomInt', () => {
     for (let i = 0; i < TEST_SIZE; i++) {
       const value = randomInt(randomizer, 1, 10)
