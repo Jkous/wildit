@@ -6,6 +6,7 @@ export default defineConfig([
     platform: 'neutral',
     dts: true,
     format: ['cjs', 'esm'],
-    minify: true
+    minify: true,
+    sourcemap: true
   }
 ])
