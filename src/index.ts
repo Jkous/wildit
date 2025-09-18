@@ -1,4 +1,4 @@
-import type { FnRandomFeature, FnRandomResult } from './types'
+import type { FnRandomFeature, WilditResult } from './types'
 import { splitmix32 } from './utils'
 
 const rng = splitmix32
@@ -10,16 +10,15 @@ const rng = splitmix32
 export default function wildit<K extends keyof FnRandomFeature>(
   seed: number,
   arr: { [P in K]: FnRandomFeature[P] }
-): { [P in K]: ReturnType<FnRandomFeature[P]> } {
-  const result = {} as { [P in K]: ReturnType<FnRandomFeature[P]> }
-
+): WilditResult<K> {
   const next = rng(seed)
+  const entries = Object.entries(arr) as [K, FnRandomFeature[K]][]
 
-  for (const key in arr) {
-    result[key as K] = arr[key as K](next)
-  }
+  const resultEntries = entries.map(([key, fn]) => {
+    return [key, fn(next)]
+  })
 
-  return result
+  return Object.fromEntries(resultEntries) as WilditResult<K>
 }
 
 // export function createRandomizer(
