@@ -1,4 +1,4 @@
-import type { FnRandomFeature } from './types'
+import type { FnRandomFeature, FnRandomResult } from './types'
 import { splitmix32 } from './utils'
 
 const rng = splitmix32

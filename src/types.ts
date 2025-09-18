@@ -5,4 +5,6 @@ export type FnRandomFeature = {
   shuffle: typeof shuffle
 }
 
+export type FnRandomResult = ReturnType<FnRandomFeature[keyof FnRandomFeature]>
+
 export type Randomizer = () => number
