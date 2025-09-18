@@ -5,6 +5,7 @@ export default defineConfig([
     entry: ['./src/index.ts'],
     platform: 'neutral',
     dts: true,
-    format: ['cjs', 'esm']
+    format: ['cjs', 'esm'],
+    minify: true
   }
 ])

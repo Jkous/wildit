@@ -1,28 +1,25 @@
-import { next } from './randomizer'
-import type { MakeRandomizerResult, RandomizerFn } from './types'
+import type { FnRandomFeature } from './types'
+import { splitmix32 } from './utils'
 
-// Re-export the function creators for better Go to Definition support
-export { createRandomInt } from './fns/randomInt'
-export { createRandomPercent } from './fns/randomPercent'
+const rng = splitmix32
 
 // function getRandomSeed() {
 //   return Date.now() * Math.random()
 // }
 
-export default function makeRandomizer<
-  T extends readonly RandomizerFn<string, unknown>[]
->(seed: number, fns: T): MakeRandomizerResult<T> {
-  const rng = next(seed)
-  const result = {} as Record<string, unknown>
+export default function wildit<K extends keyof FnRandomFeature>(
+  seed: number,
+  arr: { [P in K]: FnRandomFeature[P] }
+): { [P in K]: ReturnType<FnRandomFeature[P]> } {
+  const result = {} as { [P in K]: ReturnType<FnRandomFeature[P]> }
 
-  // Using a for loop and direct assignment to maintain better source mapping
-  for (const fn of fns) {
-    // Store the built function with its original reference
-    const builtFunction = fn.build(rng)
-    result[fn.key] = builtFunction
+  const next = rng(seed)
+
+  for (const key in arr) {
+    result[key as K] = arr[key as K](next)
   }
 
-  return result as MakeRandomizerResult<T>
+  return result
 }
 
 // export function createRandomizer(
@@ -52,6 +49,4 @@ export default function makeRandomizer<
 //   return addRandomizer(parsedKey, seed)
 // }
 
-// Re-exports of functions
-export { randomInt } from './fns/randomInt'
-export { randomPercent } from './fns/randomPercent'
+export { randomInt, shuffle } from './fns'
